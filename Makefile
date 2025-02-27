@@ -9,7 +9,10 @@ SRC = src/organized.c\
 	src/add.c\
 	src/del.c\
 	src/disp.c\
-	src/sort.c
+	src/sort.c\
+	src/compare_sort.c\
+	src/swap_node.c\
+	src/verif_sort.c
 
 NAME = organized
 
