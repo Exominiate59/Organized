@@ -17,7 +17,7 @@ const flag_t handle[] = {
 int verif_function(char *str, int reverse, list_t **head)
 {
     if (!str || !head || !*head)
-        return 84;
+        return 0;
     for (int i = 0; handle[i].c; i++) {
         if (my_strcmp(str, handle[i].c) == 0)
             return handle[i].fonction(head, reverse);
@@ -36,7 +36,10 @@ int parse_args(char **args, int *reverse, char **sort_type)
             my_strcmp("NAME", args[i]) == 0 ||
             my_strcmp("ID", args[i]) == 0)
             *sort_type = args[i];
-        else
+        if (my_strcmp("-r", args[i]) != 0 &&
+            my_strcmp("TYPE", args[i]) != 0 &&
+            my_strcmp("NAME", args[i]) != 0 &&
+            my_strcmp("ID", args[i]) != 0)
             return 84;
     }
     if (!*sort_type)
