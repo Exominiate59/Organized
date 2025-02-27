@@ -9,7 +9,7 @@
 
 int handle_del(char **args)
 {
-    if (!args)
+    if (!args || !args[0])
         return 84;
     for (int i = 0; args[i]; i++) {
         if (!my_str_isnum(args[i]))
@@ -31,17 +31,18 @@ int del_node(list_t **head, int del_id)
     list_t *current = *head;
     list_t *temp = NULL;
 
+    if (!current)
+        return 84;
     if (current->id == del_id) {
         *head = current->next;
         print_del(current);
         return 0;
     }
-    while (current) {
-        if (current->id == del_id) {
+    while (current && current->next) {
+        if (current->next->id == del_id) {
             temp = current->next;
-            current->next = current->next->next;
-            print_del(current);
-            return 0;
+            current->next = temp->next;
+            return print_del(temp);
         }
         current = current->next;
     }
@@ -53,12 +54,12 @@ int del(void *data, char **args)
     list_t **head = (list_t **)data;
     int del_id = 0;
 
-    if (handle_del(args) == 84 || args[0] == NULL)
+    if (handle_del(args) == 84)
         return 84;
     for (int i = 0; args[i]; i++) {
         del_id = my_getnbr(args[i]);
         if (del_node(head, del_id) == 84)
-        return 84;
+            return 84;
     }
     return 0;
 }
