@@ -19,13 +19,13 @@ INCLUDE = -I./include/
 
 LIB = -L ./lib/my/ -lmy
 
-EXTRA = -Wall -Wextra -g
+CFLAGS += -Wall -Wextra -lncurses $(INCLUDE)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C lib/my
-	gcc -o $(NAME) $(OBJ) $(EXTRA) $(INCLUDE) -L./libshell -lshell $(LIB)
+	gcc -o $(NAME) $(OBJ) $(CFLAGS) -L./libshell -lshell $(LIB)
 
 valgrind: $(NAME)
 	@echo -e "\033[1;34mRunning valgrind on $(NAME)...\033[0m"
