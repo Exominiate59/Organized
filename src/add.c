@@ -21,8 +21,8 @@ int handle_error(char *arg)
 int handle_add(char **args)
 {
     for (int i = 0; args[i]; i += 2) {
-    if (!args[i + 1] || handle_error(args[i]) == 84)
-        return 84;
+        if (!args[i + 1] || handle_error(args[i]) == 84)
+            return 84;
     }
     return 0;
 }
@@ -51,7 +51,7 @@ int add(void *data, char **args)
     static int id_count = 0;
     list_t *new;
 
-    if (handle_add(args) == 84)
+    if (handle_add(args) == 84 || !args[1])
         return 84;
     for (int i = 0; args[i]; i += 2) {
         new = create_element(args[i], args[i + 1], id_count);
