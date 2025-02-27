@@ -23,6 +23,7 @@ int handle_add(char **args)
     for (int i = 0; args[i]; i += 2) {
     if (!args[i + 1] || handle_error(args[i]) == 84)
         return 84;
+    }
     return 0;
 }
 
