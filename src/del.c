@@ -22,6 +22,8 @@ int print_del(list_t *current)
 {
     mini_printf("%s n°%d - \"%s\" deleted.\n", current->type, current->id,
         current->name);
+    free(current->type);
+    free(current->name);
     free(current);
     return 0;
 }
