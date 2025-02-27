@@ -16,7 +16,7 @@ int disp(void *data, char **args)
         return 84;
     temp = *new_data;
     if (!temp)
-        return 84;
+        return 0;
     for (; temp; temp = temp->next)
         mini_printf("%s n°%d - \"%s\"\n", temp->type, temp->id, temp->name);
     return 0;
