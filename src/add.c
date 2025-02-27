@@ -21,10 +21,8 @@ int handle_error(char *arg)
 int handle_add(char **args)
 {
     for (int i = 0; args[i]; i += 2) {
-        if (args[i] == NULL || args[i + 1] == NULL ||
-            handle_error(args[i]) == 84)
-            return 84;
-    }
+    if (!args[i + 1] || handle_error(args[i]) == 84)
+        return 84;
     return 0;
 }
 
@@ -38,10 +36,16 @@ int add(void *data, char **args)
         return 84;
     for (int i = 0; args[i]; i += 2) {
         new = malloc(sizeof(list_t));
+        if (!new)
+            return 84;
         new->id = id_count;
         id_count++;
         new->type = my_strdup(args[i]);
+        if (!new->type)
+            return 84;
         new->name = my_strdup(args[i + 1]);
+        if (!new->name)
+            return 84;
         new->next = *new_data;
         *new_data = new;
         mini_printf("%s n°%d - \"%s\" added.\n", (*new_data)->type,
