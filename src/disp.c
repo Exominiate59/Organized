@@ -10,9 +10,12 @@
 int disp(void *data, char **args)
 {
     list_t **new_data = data;
-    list_t *temp = *new_data;
+    list_t *temp;
 
-    if (args[0] != NULL)
+    if (!new_data || args[0] != NULL)
+        return 84;
+    temp = *new_data;
+    if (!temp)
         return 84;
     for (; temp; temp = temp->next)
         mini_printf("%s n°%d - \"%s\"\n", temp->type, temp->id, temp->name);
